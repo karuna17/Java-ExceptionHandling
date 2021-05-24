@@ -1,14 +1,24 @@
 import java.util.Scanner;
-
 import org.junit.jupiter.api.Test;
+
+class InvalidMoodException extends Exception{
+	public String toString()
+	{
+		return "Invalid Mood due to you entered null or empty string";
+	}
+}
+
 
 class MoodAnalyser {
 
 	@Test
-	public String analyseMood(String msg) {
+	public String analyseMood(String msg) throws InvalidMoodException {
 		if(msg.contains("Happy")) {
 			return "HAPPY";
-		}else {
+		}else if(msg.contains("NULL")|| msg.contains("")) {
+				throw new InvalidMoodException();
+		}
+		else {
 			return "SAD";
 		}
 	}
@@ -21,13 +31,10 @@ class MoodAnalyser {
 		String message	= sc.next();
 		try {
 			m.analyseMood(message);
-		}catch (NullPointerException e) {
-			e.printStackTrace();	
-		}
-		if(message.equalsIgnoreCase("null")) 
-		{
-			System.out.println("Happy");
+		} catch (InvalidMoodException e) {
+			e.printStackTrace();
 		}
 	}
 
 }
+
