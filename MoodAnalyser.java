@@ -8,8 +8,6 @@ class MoodAnalyser {
 	public String analyseMood(String msg) {
 		if(msg.contains("Happy")) {
 			return "HAPPY";
-		}else if(msg.contains(null)) {
-			return "Invalid Mood";
 		}else {
 			return "SAD";
 		}
@@ -21,8 +19,15 @@ class MoodAnalyser {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter your mood");
 		String message	= sc.next();
-		m.analyseMood(message);
-		System.out.println(message);
+		try {
+			m.analyseMood(message);
+		}catch (NullPointerException e) {
+			e.printStackTrace();	
+		}
+		if(message.equalsIgnoreCase("null")) 
+		{
+			System.out.println("Happy");
+		}
 	}
 
 }
